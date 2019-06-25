@@ -10,6 +10,8 @@
 var detectNetwork = function(cardNumber) {
   var prefixOne = cardNumber.substring(0,1);
   var prefixTwo = cardNumber.substring(0,2);
+  var prefixThree = cardNumber.substring(0,3);
+  var prefixFour = cardNumber.substring(0,4);
   var cardLength = cardNumber.length;
 
   if ( (prefixTwo === '38' || prefixTwo === '39') && cardLength === 14 ) {
@@ -20,6 +22,13 @@ var detectNetwork = function(cardNumber) {
       return 'Visa';
   } else if ( (prefixTwo === '51' || prefixTwo === '52' || prefixTwo === '53' || prefixTwo === '54' || prefixTwo === '55') && cardLength === 16) {
       return 'MasterCard';
+  } else if ((prefixFour === '5018' || prefixFour === '5020' || prefixFour === '5038' || prefixFour === '6304') && (cardLength === 12 || cardLength === 13 || cardLength === 14 || cardLength === 15 || cardLength === 16 || cardLength === 17 || cardLength === 18 || cardLength === 19) ) {
+      return 'Maestro';
+  } else if (prefixFour === '6011' || prefixTwo === '65' || 644 <= prefixThree <= 649) {
+      if (cardLength === 16 || cardLength === 19) {
+        return 'Discover';
+      }
+
   } else {
       return 'Invalid';
   }
